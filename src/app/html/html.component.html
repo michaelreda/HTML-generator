@@ -1,5 +1,6 @@
 <div class="comp">
-  <strong>T</strong>
+  <strong *ngIf="component.type=='Text'">T</strong>
+  <img class="ico" *ngIf="component.type=='Link'" src="../../assets/images/link.png">
   <span class="bd delete-bd badge badge-light" (click)="deleteComponent()"><i class="fas fa-trash-alt"></i></span>
   <span class="bd edit-bd badge badge-light" (click)="editComponent()"><i class="fas fa-pencil-alt"></i></span>
 </div>

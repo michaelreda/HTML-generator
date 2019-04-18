@@ -16,8 +16,14 @@ export class HtmlCodeComponent implements OnInit {
         row.components.forEach(c => {
           if (c.attributes == undefined)
             return
-          if(c.type=="Text" ){
+          if(c.type=="Text" && c.attributes.text!=null){
             this.html+=c.attributes.text;
+          }else if(c.type=="Link" ){
+            this.html+= "<a href=\""+c.attributes.href+"\""
+            if(c.attributes.text!="")
+              this.html+= ">"+c.attributes.text+"</a>"
+            else
+              this.html+= ">"+c.attributes.href+"</a>"
           }
         });
         this.html += "</" + row.style + ">\n";

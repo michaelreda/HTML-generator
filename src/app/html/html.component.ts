@@ -18,20 +18,12 @@ export class HtmlComponent implements OnInit {
     this.editComponent()
   }
 
-  getTextAttributes(){
-    // var text=""
-    if(this.component.attributes != undefined){
-      var text = prompt("Enter the text you want",this.component.attributes.text)
-    }else{
-      var text = prompt("Enter the text you want")
-    }
-    return {"text":text}
-  }
-
   editComponent(){
     if(this.component != undefined){
       if(this.component.type=="Text"){
         this.component.attributes= this.getTextAttributes();
+      }else if(this.component.type=="Link"){
+        this.component.attributes= this.getLinkAttributes();
       }
       this.rowsService.rowChanged(this.row)
     }
@@ -46,4 +38,26 @@ export class HtmlComponent implements OnInit {
     this.rowsService.rowChanged(this.row)
   }
 
+
+  getTextAttributes(){
+    // var text=""
+    if(this.component.attributes != undefined){
+      var text = prompt("Enter the text you want",this.component.attributes.text)
+    }else{
+      var text = prompt("Enter the text you want")
+    }
+    return {"text":text}
+  }
+
+  getLinkAttributes(){
+    // var text=""
+    if(this.component.attributes != undefined){
+      var href = prompt("Enter the link",this.component.attributes.href)
+      var text = prompt("Enter the text for the link",this.component.attributes.text)
+    }else{
+      var href = prompt("Enter the link")
+      var text = prompt("Enter the text for the link")
+    }
+    return {"href":href,"text":text}
+  }
 }
