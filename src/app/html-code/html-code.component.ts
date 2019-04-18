@@ -13,7 +13,13 @@ export class HtmlCodeComponent implements OnInit {
       this.html = "<html>\n";
       rows.forEach(row => {
         this.html += "<" + row.style + ">";
-
+        row.components.forEach(c => {
+          if (c.attributes == undefined)
+            return
+          if(c.type=="Text" ){
+            this.html+=c.attributes.text;
+          }
+        });
         this.html += "</" + row.style + ">\n";
       });
       this.html += "</html>"
@@ -21,4 +27,5 @@ export class HtmlCodeComponent implements OnInit {
   }
 
   ngOnInit() {}
+
 }

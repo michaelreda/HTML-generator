@@ -8,7 +8,7 @@
       </select>
     </div>
     <div class="col-md-8">
-        <app-html *ngFor= "let c of row.components" [component]="c"></app-html>
+        <app-html *ngFor= "let c of row.components" [component]="c" [row]="row"></app-html>
     </div>
     <div class="col-md-2">
         <select class="form-control" name="componentToAdd" [(ngModel)]="componentToAdd" (change)="addComponent()">
