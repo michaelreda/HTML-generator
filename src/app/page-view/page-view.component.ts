@@ -21,4 +21,14 @@ export class PageViewComponent implements OnInit {
   addRow() {
     this.rowsService.addRow();
   }
+
+  exportState(){
+    var encodedUri = encodeURI("data:text;charset=utf-8,"+JSON.stringify(this.rowsService.rows));
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "state.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+  }
 }

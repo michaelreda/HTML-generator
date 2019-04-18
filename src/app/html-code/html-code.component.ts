@@ -68,4 +68,14 @@ export class HtmlCodeComponent implements OnInit {
 
   ngOnInit() {}
 
+  exportFile(){
+    var encodedUri = encodeURI("data:text/html;charset=utf-8,"+this.html);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "generated HTML.html");
+    document.body.appendChild(link); // Required for FF
+
+    link.click();
+  }
+
 }
