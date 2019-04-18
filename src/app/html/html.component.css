@@ -1,0 +1,27 @@
+.comp{
+    border: black;
+    border-style: solid;
+    padding: 7px;
+    border-radius: 10px;
+    width: 70px;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+}
+
+.bd{
+    position: absolute;
+    top: -7px;
+    border-radius: 50px;
+}
+
+.edit-bd{
+    background: #eaea68;
+    right: 15px;
+}
+
+.delete-bd{
+    right: -5px;
+    color:white;
+    background: red;
+}
