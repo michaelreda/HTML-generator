@@ -11,7 +11,7 @@ export class RowsService {
   }
 
   public addRow(){
-    this.rows.push(new Row())
+    this.rows.push(new Row(this.i))
     this.i++;
     this.rowsChanged.emit(this.rows);
   }

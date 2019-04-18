@@ -10,12 +10,13 @@ export class HtmlCodeComponent implements OnInit {
   html = "";
   constructor(private rowsService: RowsService) {
     this.rowsService.rowsChanged.subscribe(rows => {
-      this.html = "";
+      this.html = "<html>\n";
       rows.forEach(row => {
         this.html += "<" + row.style + ">";
 
         this.html += "</" + row.style + ">\n";
       });
+      this.html += "</html>"
     });
   }
 

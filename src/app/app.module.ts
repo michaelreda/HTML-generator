@@ -7,13 +7,15 @@ import { RowComponent } from './row/row.component';
 import { HtmlCodeComponent } from './html-code/html-code.component';
 import { RowsService } from './rows.service';
 import { FormsModule } from '@angular/forms';
+import { HtmlComponent } from './html/html.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageViewComponent,
     RowComponent,
-    HtmlCodeComponent
+    HtmlCodeComponent,
+    HtmlComponent
   ],
   imports: [
     BrowserModule,
