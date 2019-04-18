@@ -1,22 +1,27 @@
-<div class="row">
+<div class="row" style="padding-top:10px">
     <div class="col-md-2">
-      <select class="form-control" name="rowStyle" [(ngModel)]="rowStyle" (change)="styleChanged()">
+      <select class="form-control" name="rowStyle" [(ngModel)]="rowStyle" (change)="styleChanged()" style="margin-top:5px;">
         <option value="p">p</option>
+        <option value="span">span</option>
         <option value="h1">h1</option>
         <option value="h2">h2</option>
         <option value="h3">h3</option>
+        <option value="h4">h4</option>
+        <option value="h5">h5</option>
       </select>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 comp-row-style">
         <app-html *ngFor= "let c of row.components" [component]="c" [row]="row"></app-html>
     </div>
     <div class="col-md-2">
-        <select class="form-control" name="componentToAdd" [(ngModel)]="componentToAdd" (change)="addComponent()">
-            <option value="+">+</option>
-            <option value="Image">Image</option>
-            <option value="Text">Text</option>
-            <option value="Link">Link</option>
+        <select class="form-control" name="componentToAdd" [(ngModel)]="componentToAdd" (change)="addComponent()" style="margin-top:5px;">
+            <option value="def">+</option>
             <option value="Audio">Audio</option>
+            <option value="Iframe">Iframe</option>
+            <option value="Image">Image</option>
+            <option value="Link">Link</option>
+            <option value="Text">Text</option>
+            <option value="Video">Link</option>
         </select>
     </div>
   </div> 

@@ -24,6 +24,14 @@ export class HtmlComponent implements OnInit {
         this.component.attributes= this.getTextAttributes();
       }else if(this.component.type=="Link"){
         this.component.attributes= this.getLinkAttributes();
+      }else if(this.component.type=="Image"){
+        this.component.attributes= this.getImageAttributes();
+      }else if(this.component.type=="Audio"){
+        this.component.attributes= this.getAudioAttributes();
+      }else if(this.component.type=="Video"){
+        this.component.attributes= this.getVideoAttributes();
+      }else if(this.component.type=="Iframe"){
+        this.component.attributes= this.getIframeAttributes();
       }
       this.rowsService.rowChanged(this.row)
     }
@@ -59,5 +67,51 @@ export class HtmlComponent implements OnInit {
       var text = prompt("Enter the text for the link")
     }
     return {"href":href,"text":text}
+  }
+
+  getImageAttributes(){
+    // var text=""
+    if(this.component.attributes != undefined){
+      var src = prompt("Enter image source",this.component.attributes.src)
+      var width = prompt("Enter image width in pixels",this.component.attributes.width)
+      var height = prompt("Enter image height in pixels",this.component.attributes.height)
+    }else{
+      var src = prompt("Enter image source")
+      var width = prompt("Enter image width in pixels")
+      var height = prompt("Enter image height in pixels")
+    }
+    return {"src":src,"width":width,"height":height}
+  }
+
+  getAudioAttributes(){
+    if(this.component.attributes != undefined){
+      var src = prompt("Enter audio source",this.component.attributes.src)
+    }else{
+      var src = prompt("Enter audio source");
+    }
+    return {"src":src}
+  }
+
+  getVideoAttributes(){
+    // var text=""
+    if(this.component.attributes != undefined){
+      var src = prompt("Enter video source",this.component.attributes.src)
+      var width = prompt("Enter video width in pixels",this.component.attributes.width)
+      var height = prompt("Enter video height in pixels",this.component.attributes.height)
+    }else{
+      var src = prompt("Enter video source")
+      var width = prompt("Enter video width in pixels")
+      var height = prompt("Enter video height in pixels")
+    }
+    return {"src":src,"width":width,"height":height}
+  }
+
+  getIframeAttributes(){
+    if(this.component.attributes != undefined){
+      var src = prompt("Enter iframe source",this.component.attributes.src)
+    }else{
+      var src = prompt("Enter iframe source");
+    }
+    return {"src":src}
   }
 }

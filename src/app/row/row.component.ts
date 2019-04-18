@@ -11,7 +11,7 @@ import { Row } from '../row';
 export class RowComponent implements OnInit {
 
   rowStyle: string;
-  componentToAdd:string="+";
+  componentToAdd:string="def";
   @Input() row: Row;
   constructor(private rowsService:RowsService) { 
     
@@ -28,7 +28,7 @@ export class RowComponent implements OnInit {
 
   componentsCount=0
   addComponent(){
-    if(this.componentToAdd != "+"){
+    if(this.componentToAdd != "def"){
       this.row.components.push(
         {
           "id": this.componentsCount,
@@ -38,7 +38,7 @@ export class RowComponent implements OnInit {
       this.componentsCount++;
       this.rowsService.rowChanged(this.row)
     }
-    this.componentToAdd="+";
+    this.componentToAdd="def";
   }
 
 }

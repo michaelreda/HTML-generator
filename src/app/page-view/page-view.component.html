@@ -1,5 +1,5 @@
 
-    <h2>Page view</h2>
+    <h2>Edit your page</h2>
     <div class="row">
       <div class="col-md-2">
         Row style
@@ -11,9 +11,10 @@
         Add Component
       </div>
     </div> 
-    <div id="rows">
+    <div id="rows" class="cont">
         <app-row *ngFor="let row of rows" [row]="row"></app-row>
     </div>
+    <br>
     <button type="button" class="btn btn-info" (click)="addRow()">
       Add Row
     </button>

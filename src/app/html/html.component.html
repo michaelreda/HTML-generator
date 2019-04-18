@@ -1,6 +1,10 @@
 <div class="comp">
   <strong *ngIf="component.type=='Text'">T</strong>
   <img class="ico" *ngIf="component.type=='Link'" src="../../assets/images/link.png">
+  <img class="ico" *ngIf="component.type=='Image'" src="../../assets/images/image.png">
+  <img class="ico" *ngIf="component.type=='Audio'" src="../../assets/images/audio.png">
+  <img class="ico" *ngIf="component.type=='Video'" src="../../assets/images/video.png">
+  <img class="ico" *ngIf="component.type=='Iframe'" src="../../assets/images/iframe.jpg">
   <span class="bd delete-bd badge badge-light" (click)="deleteComponent()"><i class="fas fa-trash-alt"></i></span>
   <span class="bd edit-bd badge badge-light" (click)="editComponent()"><i class="fas fa-pencil-alt"></i></span>
 </div>

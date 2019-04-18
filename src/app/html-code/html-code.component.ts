@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,Output,EventEmitter } from "@angular/core";
 import { RowsService } from "../rows.service";
 
 @Component({
@@ -7,10 +7,13 @@ import { RowsService } from "../rows.service";
   styleUrls: ["./html-code.component.css"]
 })
 export class HtmlCodeComponent implements OnInit {
-  html = "";
+  
+  @Output() htmlChanged: EventEmitter<String> =new EventEmitter();
+  html:string;
   constructor(private rowsService: RowsService) {
     this.rowsService.rowsChanged.subscribe(rows => {
       this.html = "<html>\n";
+      this.html += "<body>\n";
       rows.forEach(row => {
         this.html += "<" + row.style + ">";
         row.components.forEach(c => {
@@ -18,17 +21,48 @@ export class HtmlCodeComponent implements OnInit {
             return
           if(c.type=="Text" && c.attributes.text!=null){
             this.html+=c.attributes.text;
-          }else if(c.type=="Link" ){
+          }
+          
+          else if(c.type=="Link" ){
             this.html+= "<a href=\""+c.attributes.href+"\""
-            if(c.attributes.text!="")
+            if(c.attributes.text!="" && c.attributes.text!=null)
               this.html+= ">"+c.attributes.text+"</a>"
             else
               this.html+= ">"+c.attributes.href+"</a>"
           }
+
+          else if(c.type=="Image" ){
+            this.html+= "<img src=\""+c.attributes.src+"\""
+            if(c.attributes.width!="" && c.attributes.width!= null)
+              this.html+= " width=\""+c.attributes.width+"\""
+            if(c.attributes.height!="" && c.attributes.height!=null)
+              this.html+= " height=\""+c.attributes.height+"\""
+            this.html+="/>"
+          }
+
+          else if(c.type=="Audio" ){
+            this.html+= "<audio src=\""+c.attributes.src+"\" controls />"
+          }
+
+          else if(c.type=="Video" ){
+            this.html+= "<video src=\""+c.attributes.src+"\""
+            if(c.attributes.width!="" && c.attributes.width!= null)
+              this.html+= " width=\""+c.attributes.width+"\""
+            if(c.attributes.height!="" && c.attributes.height!=null)
+              this.html+= " height=\""+c.attributes.height+"\""
+            this.html+="controls />"
+          }
+
+          else if(c.type=="Iframe" ){
+            this.html+= "<iframe src=\""+c.attributes.src+"\">"
+            this.html+="</iframe>"
+          }
         });
         this.html += "</" + row.style + ">\n";
       });
+      this.html += "</body>\n"
       this.html += "</html>"
+      this.htmlChanged.emit(this.html)
     });
   }
 

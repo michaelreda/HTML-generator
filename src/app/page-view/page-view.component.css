@@ -1,0 +1,5 @@
+.cont{
+    overflow-y: auto;
+    height:275px;
+    overflow-x: hidden;
+}
