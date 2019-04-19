@@ -26,10 +26,10 @@ export class PageViewComponent implements OnInit {
   }
 
   exportState(){
-    var encodedUri = encodeURI("data:text;charset=utf-8,"+JSON.stringify(this.rowsService.rows));
+    var encodedUri = encodeURI("data:text;charset=utf-8,"+JSON.stringify({rows:this.rowsService.rows,pageTitle:this.pageTitleService.pageTitle}));
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "state.csv");
+    link.setAttribute("download", "state.json");
     document.body.appendChild(link); // Required for FF
 
     link.click();
