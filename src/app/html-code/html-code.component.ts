@@ -1,6 +1,7 @@
 import { PageTitleService } from './../page-title.service';
 import { Component, OnInit,Output,EventEmitter } from "@angular/core";
 import { RowsService } from "../rows.service";
+import {html2json} from "html2json"
 
 @Component({
   selector: "app-html-code",
@@ -81,7 +82,14 @@ export class HtmlCodeComponent implements OnInit {
       });
       this.html += "</body>\n"
       this.html += "</html>"
-      this.htmlChanged.emit(this.html)
+      this.htmlCodeChanged(this.html);
+      
+  }
+
+  htmlCodeChanged(html){
+    var htmlJson = html2json(html); 
+    console.log(htmlJson)
+    this.htmlChanged.emit(html)
   }
 
   exportFile(){
