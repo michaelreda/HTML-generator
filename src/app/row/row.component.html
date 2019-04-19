@@ -10,8 +10,8 @@
         <option value="h5">h5</option>
       </select>
     </div>
-    <div class="col-md-8 comp-row-style">
-        <app-html *ngFor= "let c of row.components" [component]="c" [row]="row"></app-html>
+    <div class="col-md-8 comp-row-style" [sortablejs]="row.components" [sortablejsOptions]="sortableOptions">
+        <app-html  *ngFor= "let c of row.components" [component]="c" [row]="row"></app-html>
     </div>
     <div class="col-md-2">
         <select class="form-control" name="componentToAdd" [(ngModel)]="componentToAdd" (change)="addComponent()" style="margin-top:5px;">
@@ -21,7 +21,7 @@
             <option value="Image">Image</option>
             <option value="Link">Link</option>
             <option value="Text">Text</option>
-            <option value="Video">Link</option>
+            <option value="Video">Video</option>
         </select>
     </div>
   </div> 

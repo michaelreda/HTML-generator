@@ -2,6 +2,7 @@ import { HtmlComponent } from './../html/html.component';
 import { RowsService } from './../rows.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Row } from '../row';
+import { SortablejsOptions } from 'angular-sortablejs';
 
 @Component({
   selector: 'app-row',
@@ -10,6 +11,11 @@ import { Row } from '../row';
 })
 export class RowComponent implements OnInit {
 
+  sortableOptions: SortablejsOptions = {
+    onUpdate: (event: any) => {
+      this.componentsOrderChanged();
+    }
+  };
   rowStyle: string;
   componentToAdd:string="def";
   @Input() row: Row;
@@ -39,6 +45,10 @@ export class RowComponent implements OnInit {
       this.rowsService.rowChanged(this.row)
     }
     this.componentToAdd="def";
+  }
+
+  componentsOrderChanged(){
+    this.rowsService.rowChanged(this.row);
   }
 
 }

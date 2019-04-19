@@ -1,5 +1,7 @@
+import { SortablejsModule } from 'angular-sortablejs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
 
 import { AppComponent } from './app.component';
 import { PageViewComponent } from './page-view/page-view.component';
@@ -19,7 +21,8 @@ import { HtmlComponent } from './html/html.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    SortablejsModule
   ],
   providers: [RowsService],
   bootstrap: [AppComponent]

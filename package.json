@@ -21,9 +21,11 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
+    "angular-sortablejs": "^2.7.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",
+    "sortablejs": "^1.8.4",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
