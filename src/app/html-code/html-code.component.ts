@@ -90,8 +90,9 @@ export class HtmlCodeComponent implements OnInit {
   htmlCodeChanged(html){
     if(this.html == html)
       return;
-    if(html == "") //i.e the user typed in the text area..
+    if(html == ""){ //i.e the user typed in the text area..
       html=this.html
+    }
     var htmlJson = html2json(html); 
     var rows =[]
     var pageTitle=""
@@ -182,7 +183,8 @@ export class HtmlCodeComponent implements OnInit {
     });
 
     // console.log(rows);
-    this.rowsService.setRows(rows);
+    if(rows.length!=0)
+      this.rowsService.setRows(rows);
     this.htmlChanged.emit(html)
   }
 
