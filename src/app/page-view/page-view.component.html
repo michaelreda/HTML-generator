@@ -1,6 +1,12 @@
 
     <h2>Edit your page</h2>
     <div class="row">
+        <div class="form-group col-md-12" >
+            <label for="page_title">Page title: </label>
+            <input class="form-control" id="page_title" name="pageTitle" [(ngModel)]="pageTitle" (input)="pageTitleChanged()" placeholder="Your page title" style="display:inline-block;width:50%">
+        </div>
+    </div>
+    <div class="row">
       <div class="col-md-2">
         Row style
       </div>

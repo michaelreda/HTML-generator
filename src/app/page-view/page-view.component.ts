@@ -1,5 +1,6 @@
+import { PageTitleService } from './../page-title.service';
 import { RowsService } from "./../rows.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,EventEmitter,Output } from "@angular/core";
 import { Row } from "../row";
 
 @Component({
@@ -9,7 +10,9 @@ import { Row } from "../row";
 })
 export class PageViewComponent implements OnInit {
   rows: Row[]=[];
-  constructor(private rowsService: RowsService) {}
+  pageTitle:string ="";
+  
+  constructor(private rowsService: RowsService,private pageTitleService:PageTitleService) {}
 
   ngOnInit() {
     this.rowsService.rowsChanged.subscribe(rows => {
@@ -30,5 +33,10 @@ export class PageViewComponent implements OnInit {
     document.body.appendChild(link); // Required for FF
 
     link.click();
+  }
+
+  pageTitleChanged(){
+    this.pageTitleService.pageTitleChanged(this.pageTitle);
+    console.log(this.pageTitle);
   }
 }

@@ -1,3 +1,4 @@
+import { PageTitleService } from './../page-title.service';
 import { Component, OnInit,Output,EventEmitter } from "@angular/core";
 import { RowsService } from "../rows.service";
 
@@ -10,9 +11,27 @@ export class HtmlCodeComponent implements OnInit {
   
   @Output() htmlChanged: EventEmitter<String> =new EventEmitter();
   html:string;
-  constructor(private rowsService: RowsService) {
+  rows=[];
+  pageTitle="";
+  constructor(private rowsService: RowsService,private pageTitleService:PageTitleService) {
+    pageTitleService.pageTitleChangedEvent.subscribe(pageTitle=>{
+      this.pageTitle=pageTitle;
+      this.generateHtml(this.pageTitle,this.rows);
+    })
     this.rowsService.rowsChanged.subscribe(rows => {
-      this.html = "<html>\n";
+      this.rows=rows;
+      this.generateHtml(this.pageTitle,this.rows);
+    });
+  }
+
+  ngOnInit() {
+    
+  }
+
+  generateHtml(pageTitle,rows){
+    this.html = "<!DOCTYPE html>\n<html>\n";
+    this.html += "<head>\n<title>"+pageTitle;
+    this.html+="</title>\n</head>\n";
       this.html += "<body>\n";
       rows.forEach(row => {
         this.html += "<" + row.style + ">";
@@ -63,10 +82,7 @@ export class HtmlCodeComponent implements OnInit {
       this.html += "</body>\n"
       this.html += "</html>"
       this.htmlChanged.emit(this.html)
-    });
   }
-
-  ngOnInit() {}
 
   exportFile(){
     var encodedUri = encodeURI("data:text/html;charset=utf-8,"+this.html);

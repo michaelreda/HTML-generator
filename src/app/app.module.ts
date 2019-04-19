@@ -1,3 +1,4 @@
+import { PageTitleService } from './page-title.service';
 import { SortablejsModule } from 'angular-sortablejs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -24,7 +25,7 @@ import { HtmlComponent } from './html/html.component';
     FormsModule,
     SortablejsModule
   ],
-  providers: [RowsService],
+  providers: [RowsService,PageTitleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
