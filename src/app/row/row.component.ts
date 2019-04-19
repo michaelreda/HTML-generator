@@ -51,4 +51,8 @@ export class RowComponent implements OnInit {
     this.rowsService.rowChanged(this.row);
   }
 
+  deleteRow(){
+    this.rowsService.deleteRow(this.row);
+  }
+
 }

@@ -20,4 +20,18 @@ export class RowsService {
     this.rows[row.index]=row;
     this.rowsChanged.emit(this.rows);
   }
+
+  public deleteRow(row){
+    this.rows = this.rows.filter(r=>{
+      if(r.index != row.index)
+        return r;
+    })
+    var i=0;
+    this.rows.forEach(r=>{
+      r.index=i;
+      i++;
+    })
+    this.rowsChanged.emit(this.rows);
+    console.log(this.rows);
+  }
 }

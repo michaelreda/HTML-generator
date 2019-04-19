@@ -1,3 +1,15 @@
 .comp-row-style{
     overflow-x:auto
 }
+
+.bd{
+    position: absolute;
+    top: -7px;
+    border-radius: 50px;
+}
+
+.delete-bd{
+    right: -5px;
+    color:white;
+    background: red;
+}
