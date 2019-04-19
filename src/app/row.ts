@@ -4,8 +4,8 @@ export class Row {
     style:string;
     components = [];
     
-    constructor(public i:number){
+    constructor(index:number){
         this.style = "p"
-        this.index = i;
+        this.index = index;
     }
 }

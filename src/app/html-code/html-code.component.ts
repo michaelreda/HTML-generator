@@ -2,6 +2,7 @@ import { PageTitleService } from './../page-title.service';
 import { Component, OnInit,Output,EventEmitter } from "@angular/core";
 import { RowsService } from "../rows.service";
 import {html2json} from "html2json"
+import { Row } from '../row';
 
 @Component({
   selector: "app-html-code",
@@ -89,6 +90,60 @@ export class HtmlCodeComponent implements OnInit {
   htmlCodeChanged(html){
     var htmlJson = html2json(html); 
     console.log(htmlJson)
+    var rows =[]
+    var pageTitle=""
+    var index =0;
+    htmlJson.child[0].child.forEach(element => {
+      if(element.tag == "head"){
+        if(element.child == undefined)
+              return
+        element.child.forEach(element => {
+          if(element.tag == "title"){
+            if(element.child == undefined)
+              return
+            pageTitle = element.child[0].text;
+          }
+        });
+      }else if(element.tag == "body"){
+        element.child.forEach(element => {
+          if(element.tag == "p" || element.tag == "h1" || element.tag == "h2" || element.tag == "h3" || element.tag == "h4" || element.tag == "h5" || element.tag == "span" ){
+            var row= new Row(index);
+            index++;
+            row.style = element.tag;
+            if(element.child == undefined)
+              return
+            element.child.forEach(element => {
+              if(element.node == "text" && element.text != "\n"){
+                row.components.push({
+                  "id":new Date(),
+                  "type":"Text",
+                  "attributes":{
+                    "text": element.text
+                  }
+                })
+              }else if(element.tag == "a"){
+                var comp = {
+                  "id":new Date(),
+                  "type":"Link",
+                  "attributes":{
+                    "href": element.attr.href[0],
+                    "text": ""
+                  }
+                }
+                if(element.child != undefined)
+                  comp.attributes.text = element.child[0].text;
+                row.components.push(comp);
+              }
+            });
+            rows.push(row);
+
+          }
+        });
+      }
+    });
+
+    console.log(rows);
+
     this.htmlChanged.emit(html)
   }
 
