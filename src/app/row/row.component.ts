@@ -32,16 +32,15 @@ export class RowComponent implements OnInit {
     this.rowsService.rowChanged(this.row);
   }
 
-  componentsCount=0
+ 
   addComponent(){
     if(this.componentToAdd != "def"){
       this.row.components.push(
         {
-          "id": this.componentsCount,
+          "id": new Date(),
           "type":this.componentToAdd
         }
       )
-      this.componentsCount++;
       this.rowsService.rowChanged(this.row)
     }
     this.componentToAdd="def";
