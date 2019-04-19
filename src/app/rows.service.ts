@@ -32,6 +32,11 @@ export class RowsService {
       i++;
     })
     this.rowsChanged.emit(this.rows);
-    console.log(this.rows);
+    // console.log(this.rows);
+  }
+
+  public setRows(rows){
+    this.rows = rows;
+    this.rowsChanged.emit(this.rows);
   }
 }

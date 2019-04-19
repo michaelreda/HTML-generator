@@ -15,7 +15,8 @@ export class HtmlComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editComponent()
+    if(this.component.attributes==undefined)
+      this.editComponent()
   }
 
   editComponent(){

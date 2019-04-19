@@ -15,6 +15,9 @@ export class PageViewComponent implements OnInit {
   constructor(private rowsService: RowsService,private pageTitleService:PageTitleService) {}
 
   ngOnInit() {
+    this.pageTitleService.pageTitleChangedEvent.subscribe(pageTitle=>{
+      this.pageTitle=pageTitle;
+    })
     this.rowsService.rowsChanged.subscribe(rows => {
       this.rows = rows;
     });
@@ -33,6 +36,24 @@ export class PageViewComponent implements OnInit {
     document.body.appendChild(link); // Required for FF
 
     link.click();
+  }
+
+  loadState(e){
+    let fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0]);
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      var input = JSON.parse(fileReader.result);
+      if(input.rows!=undefined){
+        this.rowsService.setRows(input.rows);
+        if(input.pageTitle!=undefined){
+          this.pageTitleService.pageTitleChanged(input.pageTitle);
+        }
+      }else{
+        alert("Invalid file");
+      }  
+    }
+
   }
 
   pageTitleChanged(){
