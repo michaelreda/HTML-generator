@@ -88,8 +88,11 @@ export class HtmlCodeComponent implements OnInit {
   }
 
   htmlCodeChanged(html){
+    if(this.html == html)
+      return;
+    if(html == "") //i.e the user typed in the text area..
+      html=this.html
     var htmlJson = html2json(html); 
-    console.log(htmlJson)
     var rows =[]
     var pageTitle=""
     var index =0;
@@ -126,13 +129,49 @@ export class HtmlCodeComponent implements OnInit {
                   "id":new Date(),
                   "type":"Link",
                   "attributes":{
-                    "href": element.attr.href[0],
+                    "href": element.attr.href,
                     "text": ""
                   }
                 }
                 if(element.child != undefined)
                   comp.attributes.text = element.child[0].text;
                 row.components.push(comp);
+              }else if(element.tag == "img"){
+                row.components.push({
+                  "id":new Date(),
+                  "type":"Image",
+                  "attributes":{
+                    "src": element.attr.src,
+                    "width": element.attr.width != undefined? element.attr.width:"",
+                    "height": element.attr.height != undefined? element.attr.height:""
+                  }
+                });
+              }else if(element.tag == "video"){
+                row.components.push({
+                  "id":new Date(),
+                  "type":"Video",
+                  "attributes":{
+                    "src": element.attr.src,
+                    "width": element.attr.width != undefined? element.attr.width:"",
+                    "height": element.attr.height != undefined? element.attr.height:""
+                  }
+                });
+              }else if(element.tag == "audio"){
+                row.components.push({
+                  "id":new Date(),
+                  "type":"Audio",
+                  "attributes":{
+                    "src": element.attr.src
+                  }
+                });
+              }else if(element.tag == "iframe"){
+                row.components.push({
+                  "id":new Date(),
+                  "type":"Iframe",
+                  "attributes":{
+                    "src": element.attr.src
+                  }
+                });
               }
             });
             rows.push(row);
@@ -142,8 +181,8 @@ export class HtmlCodeComponent implements OnInit {
       }
     });
 
-    console.log(rows);
-
+    // console.log(rows);
+    this.rowsService.setRows(rows);
     this.htmlChanged.emit(html)
   }
 
@@ -155,6 +194,16 @@ export class HtmlCodeComponent implements OnInit {
     document.body.appendChild(link); // Required for FF
 
     link.click();
+  }
+
+  loadHtml(e){
+    let fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0]);
+    fileReader.onload = (e) => {
+      // console.log(fileReader.result);
+      this.htmlCodeChanged(fileReader.result)
+    }
+
   }
 
 }
