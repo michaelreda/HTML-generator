@@ -87,9 +87,13 @@ export class HtmlCodeComponent implements OnInit {
       
   }
 
+  i=0;
   htmlCodeChanged(html){
-    if(this.html == html)
+    if(this.html == html && this.i==1){
+      this.i=0;
       return;
+    }
+    this.i=1;
     if(html == ""){ //i.e the user typed in the text area..
       html=this.html
     }
