@@ -1,8 +1,10 @@
+import { FormsModule } from '@angular/forms';
 import { HtmlComponent } from './../html/html.component';
 import { RowsService } from './../rows.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Row } from '../row';
 import { SortablejsOptions } from 'angular-sortablejs';
+
 
 @Component({
   selector: 'app-row',
@@ -17,10 +19,10 @@ export class RowComponent implements OnInit {
     }
   };
   rowStyle: string;
-  componentToAdd:string="def";
+  componentToAdd:string="Def";
   @Input() row: Row;
   constructor(private rowsService:RowsService) { 
-    
+ 
   }
 
   ngOnInit() {
@@ -33,8 +35,9 @@ export class RowComponent implements OnInit {
   }
 
  
-  addComponent(){
-    if(this.componentToAdd != "def"){
+  addComponent(e){
+    this.componentToAdd = e.target.value;
+    if(this.componentToAdd != "Def"){
       this.row.components.push(
         {
           "id": new Date(),
@@ -42,8 +45,9 @@ export class RowComponent implements OnInit {
         }
       )
       this.rowsService.rowChanged(this.row)
+      this.componentToAdd="Def";
+      e.target.value="Def";
     }
-    this.componentToAdd="def";
   }
 
   componentsOrderChanged(){

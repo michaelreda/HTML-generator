@@ -15,8 +15,8 @@
         <app-html  *ngFor= "let c of row.components" [component]="c" [row]="row"></app-html>
     </div>
     <div class="col-md-2">
-        <select class="form-control" name="componentToAdd" [(ngModel)]="componentToAdd" (change)="addComponent()" style="margin-top:5px;">
-            <option value="def">+</option>
+        <select class="form-control" name="componentToAdd"  (change)="addComponent($event)" style="margin-top:5px;">
+            <option value="Def" selected>+</option>
             <option value="Audio">Audio</option>
             <option value="Iframe">Iframe</option>
             <option value="Image">Image</option>
