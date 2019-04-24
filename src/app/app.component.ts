@@ -10,6 +10,6 @@ export class AppComponent {
   html:string;
 
   htmlChanged(html){
-    this.html = html;
+    this.html = html.replace(/<title>(\s|[a-z]|[0-9])*<\/title>/,"");
   }
 }
